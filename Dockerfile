@@ -31,14 +31,17 @@ RUN git clone https://github.com/twitter/twemproxy \
 ADD conf/nutcracker.yml		/etc/twemproxy/nutcracker.yml
 
 # 6. Nutcracker Web
-RUN gem install nutcracker-web
+#RUN gem install nutcracker-web
 
 # 7. Supervisor
 RUN mkdir -p /var/log/supervisor
 ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # 8. Port
-EXPOSE 6379 9292 22222
+EXPOSE 9379 9292 22222
 
 # 9. Start supervisord
 CMD ["/usr/bin/supervisord"]
+#ENTRYPOINT ["nutcracker","-d", "-i", "500", "-p", "/tmp/twemproxy.pid", "-c", "/etc/twemproxy/nutcracker.yml"]
+
+#CMD ["run"]
